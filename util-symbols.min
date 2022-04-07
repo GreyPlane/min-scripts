@@ -1,0 +1,3 @@
+(filename "\." split last) ^fext
+
+'fext save-symbol

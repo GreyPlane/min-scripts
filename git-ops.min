@@ -1,0 +1,12 @@
+(
+ symbol add-gerrit-remote
+ (str :repo ==> str :output)
+ ("git remote add gerrit $1/$2" ($GERRIT_REPO_BASE repo) =% ! @output)
+) ::
+
+(
+  "git push -u gerrit master && git config user.password=$1" '$GERRIT_HTTP_PASSWORD =% ! 
+  "mkdir -p .git/hooks && curl -Lo `git rev-parse --git-dir`/hooks/commit-msg $1/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg" '$GERRIT_BASE =% !
+) ^config-gerrit
+
+
